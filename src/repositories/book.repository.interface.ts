@@ -2,7 +2,7 @@ import type NewBookDTO from "../dto/NewBookDTO.js";
 import type BookDTO from "../dto/BookDTO.js";
 import type SeacrhParamsDTO from "../dto/SearchParamsDTO.js";
 
-interface BookRepository {
+export default interface BookRepository {
   /**
    * Get up to 20 first books wich stay next to skipped ones 
    * @param offset Offset from start of book colection that will be skipped
