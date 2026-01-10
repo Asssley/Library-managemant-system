@@ -6,9 +6,10 @@ export default interface BookDTO {
   author: string,
   year: number,
   description: string,
-  imagePath: string,
+  imagePath?: string,
   pagesCount: number,
-  rating: number,
+  rating?: number,
   viewCount: number,
   clickCount: number
+  isBooked:boolean
 }
