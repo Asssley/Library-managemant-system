@@ -1,13 +1,16 @@
 import { Router, type Request, type  Response } from "express";
 import { renderMainAdminPage, renderAddPage, addBook, removeBook } from "../controllers/api/v1/admin.controller.js";
+import authMiddleware from "../middleware/auth.middleware.js";
 
 const router = Router();
+
+router.use(authMiddleware)
 
 router.get("/", (req: Request, res: Response) => {
   renderMainAdminPage(req, res);
 });
 
-router.post("/add", (req: Request, res: Response) => {
+router.get("/add", (req: Request, res: Response) => {
   renderAddPage(req,res);
 });
 

@@ -25,5 +25,5 @@ export default interface IBookRepository {
    * 
    * @param id Book's id that need to be removed
    */
-  increaseTapsCount(id: number): boolean;
+  increaseBookedCount(id: number): boolean;
 }

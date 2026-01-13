@@ -1,5 +1,5 @@
 {
-  "type":"module",
+  "type": "module",
   "name": "typescript",
   "version": "1.0.0",
   "description": "",
@@ -12,8 +12,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "g": "^2.0.1",
+    "mysql2": "^3.16.0",
     "typescript": "^5.9.3"
   },
   "devDependencies": {

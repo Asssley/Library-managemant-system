@@ -1,15 +1,19 @@
+import { type Pool } from "mysql2/promise";
 import type BookDTO from "../dto/BookDTO.js";
 import type NewBookDTO from "../dto/NewBookDTO.js";
 import type SeacrhParamsDTO from "../dto/SearchParamsDTO.js";
 import type IBookRepository from "./book.repository.interface.js";
 
-export class BookRepository implements IBookRepository {
-  addBook(book: NewBookDTO): number {
+export default class BookRepository implements IBookRepository {
+
+  constructor(private readonly pool: Pool) { };
+
+  getBooks(offset: number, searchParams: SeacrhParamsDTO[]): BookDTO[] {
 
   }
 
-  getBooks(offset: number, searchParams: SeacrhParamsDTO[]): BookDTO[] {
-  
+  addBook(book: NewBookDTO): number {
+
   }
 
   removeBook(id: number): boolean {
@@ -17,6 +21,6 @@ export class BookRepository implements IBookRepository {
   }
 
   increaseTapsCount(id: number): boolean {
-    
+
   }
 }

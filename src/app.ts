@@ -1,12 +1,9 @@
-import express, { type Express, type Request, type Response } from "express";
+import dotenv from "dotenv";
+import expressApp from "./buildApp.js";
+dotenv.config();
 
-let app: Express = express();
+const PORT = process.env.PORT ?? 3000;
 
-app.use(express.json);
+let app = expressApp;
 
-
-
-app.use((req: Request, res: Response) => {
-    res.sendStatus(404);
-});
-//TODO: make 404 page
+app.listen(PORT, (err) => { err ? console.log(err): console.log(`Server is listening port ${PORT}`) })
