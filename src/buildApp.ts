@@ -3,6 +3,7 @@ import BookRepository from "./repositories/book.repository.js";
 import userRouter from "./routers/user.router.js";
 import adminRouter from "./routers/admin.router.js";
 import { pool } from "./db/scripts.js";
+import AdminRepository from "./repositories/admin.repository.interface.js";
 
 const expressApp: Express = express();
 
@@ -19,3 +20,4 @@ expressApp.use((req: Request, res: Response) => {
 export default expressApp;
 
 export const bookRepository = new BookRepository(pool);
+export const adminRepository = new AdminRepository();
