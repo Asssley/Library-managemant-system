@@ -9,6 +9,4 @@ export default interface NewBookDTO {
   imagePath?: string,
   pagesCount: number,
   rating?: number,
-  viewCount: number,
-  clickCount: number
 }

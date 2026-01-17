@@ -8,7 +8,15 @@ export default class BookRepository implements IBookRepository {
 
   constructor(private readonly pool: Pool) { };
 
-  getBooks(offset: number, searchParams: SeacrhParamsDTO[]): BookDTO[] {
+  getBooks(offset: number): BookDTO[] {
+
+  }
+
+  getBookById(id: number): BookDTO {
+
+  }
+
+  searchBooks(offset: number, searchParams?: SeacrhParamsDTO): BookDTO[] {
 
   }
 

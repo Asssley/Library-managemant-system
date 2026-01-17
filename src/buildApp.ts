@@ -7,6 +7,8 @@ import AdminRepository from "./repositories/admin.repository.interface.js";
 
 const expressApp: Express = express();
 
+expressApp.set("view engine", "ejs");
+
 expressApp.use(express.json);
 
 expressApp.use(userRouter);

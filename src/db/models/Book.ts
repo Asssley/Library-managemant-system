@@ -7,7 +7,4 @@ export interface Book {
   imagePath?: string,
   pagesCount: number,
   rating?: number,
-  viewCount: number,
-  clickCount: number,
-  isBooked: boolean
 }

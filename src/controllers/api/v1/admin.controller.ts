@@ -16,7 +16,7 @@ export const addBook = function (req: Request, res: Response) {
     
 
   } catch (e) {
-    res.status(400).send({error: "Invalid request"})
+    res.status(400).json({error: "Bad request"})
   }
 }
 

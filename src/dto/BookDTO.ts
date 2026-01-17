@@ -2,6 +2,7 @@
  * DTO fror transport books in response
  */
 export default interface BookDTO {
+  id: number
   title: string,
   author: string,
   year: number,
@@ -9,7 +10,4 @@ export default interface BookDTO {
   imagePath?: string,
   pagesCount: number,
   rating?: number,
-  viewCount: number,
-  clickCount: number
-  isBooked:boolean
 }

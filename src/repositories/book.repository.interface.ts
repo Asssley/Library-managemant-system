@@ -7,8 +7,21 @@ export default interface IBookRepository {
    * Get up to 20 first books wich stay next to skipped ones 
    * @param offset Offset from start of book colection that will be skipped
    */
-  getBooks(offset:number, searchParams: SeacrhParamsDTO[]): BookDTO[];
+  getBooks(offset:number, searchParams: SeacrhParamsDTO): BookDTO[];
 
+  /**
+   * Get book by it's id
+   * @param id Id book that needed to be found
+   */
+  getBookById(id: number): BookDTO;
+
+  /**
+   * Get up to 20 first books wich stay next to skipped ones 
+   * @param offset Offset from start of book colection that will be skipped
+   * @param searchParams Object with params which are needed to use in search
+   */
+  searchBooks(offset: number, searchParams?: SeacrhParamsDTO[]): BookDTO[];
+  
   /**
    * 
    * @param book Book that need to be added
