@@ -1,5 +1,5 @@
 import { Router, type Request, type Response } from "express";
-import { renderMainPage, renderBookPage, increaseTapsCount } from "../controllers/api/v1/user.controller.js";
+import { renderMainPage, renderBookPage, renderMainPageWithSearch,increaseTapsCount } from "../controllers/api/v1/user.controller.js";
 
 const router = Router();
 
@@ -9,6 +9,10 @@ router.get("/", (req: Request, res: Response) => {
 
 router.get("/books/:bookId", (req: Request, res: Response) => {
   renderBookPage(req, res);
+});
+
+router.get("/search", (req: Request, res: Response) => {
+  renderMainPageWithSearch(req, res);
 });
 
 router.post("/api/increase-taps", (req: Request, res: Response) => {

@@ -6,6 +6,10 @@ export const renderMainAdminPage = function (req: Request, res: Response) {
   
 }
 
+export const renderMainPageWithSearch = function (req: Request, res: Response) {
+
+}
+
 export const renderAddPage = function (req: Request, res: Response) {
 
 }
