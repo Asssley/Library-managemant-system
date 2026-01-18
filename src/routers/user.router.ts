@@ -3,20 +3,12 @@ import { renderMainPage, renderBookPage, renderMainPageWithSearch,increaseTapsCo
 
 const router = Router();
 
-router.get("/", (req: Request, res: Response) => {
-  renderMainPage(req, res);
-});
+router.get("/", renderMainPage);
 
-router.get("/books/:bookId", (req: Request, res: Response) => {
-  renderBookPage(req, res);
-});
+router.get("/books/:bookId", renderBookPage);
 
-router.get("/search", (req: Request, res: Response) => {
-  renderMainPageWithSearch(req, res);
-});
+router.get("/search", renderMainPageWithSearch);
 
-router.post("/api/increase-taps", (req: Request, res: Response) => {
-  increaseTapsCount(req, res);
-});
+router.post("/api/increase-taps", increaseTapsCount);
 
 export default router;
