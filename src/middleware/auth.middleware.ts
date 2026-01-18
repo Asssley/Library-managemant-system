@@ -1,7 +1,7 @@
 import { type Request, type Response, type NextFunction } from "express";
 import { adminRepository } from "../buildApp.js";
 
-const authMiddleware = function (req: Request, res: Response, next: NextFunction) {
+const authMiddleware = async function (req: Request, res: Response, next: NextFunction) {
   next();
   let authHeader = req.headers.authorization?.split(" ")[1];
 
@@ -13,7 +13,7 @@ const authMiddleware = function (req: Request, res: Response, next: NextFunction
       
     if (login 
       && password 
-      && adminRepository.checkUser(login, password)
+      && await adminRepository.checkUser(login, password)
     ) {
       next();
     }

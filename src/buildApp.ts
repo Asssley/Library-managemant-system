@@ -22,4 +22,4 @@ expressApp.use((req: Request, res: Response) => {
 export default expressApp;
 
 export const bookRepository = new BookRepository(pool);
-export const adminRepository = new AdminRepository();
+export const adminRepository = new AdminRepository(pool);
