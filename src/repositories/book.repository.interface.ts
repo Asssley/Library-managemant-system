@@ -7,36 +7,36 @@ export default interface IBookRepository {
    * Get up to 20 first books wich stay next to skipped ones 
    * @param offset Offset from start of book colection that will be skipped
    */
-  getBooks(offset:number, searchParams: SeacrhParamsDTO): BookDTO[];
+  getBooks(offset:number, searchParams: SeacrhParamsDTO): Promise<BookDTO[]>;
 
   /**
    * Get book by it's id
    * @param id Id book that needed to be found
    */
-  getBookById(id: number): BookDTO;
+  getBookById(id: number): Promise<BookDTO | null>;
 
   /**
    * Get up to 20 first books wich stay next to skipped ones 
    * @param offset Offset from start of book colection that will be skipped
    * @param searchParams Object with params which are needed to use in search
    */
-  searchBooks(offset: number, searchParams?: SeacrhParamsDTO[]): BookDTO[];
+  searchBooks(offset: number, searchParams?: SeacrhParamsDTO): Promise<BookDTO[]>;
   
   /**
    * 
    * @param book Book that need to be added
    */
-  addBook(book: NewBookDTO): number;
+  addBook(book: NewBookDTO): Promise<number>;
 
   /**
    * 
    * @param id Book's id that need to be removed
    */
-  removeBook(id: number): boolean;
+  removeBook(id: number): Promise<boolean>;
 
   /**
    * 
    * @param id Book's id that need to be removed
    */
-  increaseBookedCount(id: number): boolean;
+  increaseTapsCount(id: number): Promise<boolean>;
 }

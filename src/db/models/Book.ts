@@ -1,4 +1,6 @@
-export interface Book {
+import type { RowDataPacket } from "mysql2";
+
+export interface Book extends RowDataPacket {
   id: number,
   title: string,
   author: string,
