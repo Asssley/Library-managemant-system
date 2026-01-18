@@ -9,4 +9,5 @@ export interface Book extends RowDataPacket {
   imagePath?: string,
   pagesCount: number,
   rating?: number,
+  clickCount: number
 }
