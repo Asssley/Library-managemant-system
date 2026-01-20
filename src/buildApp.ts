@@ -4,6 +4,10 @@ import userRouter from "./routers/user.router.js";
 import adminRouter from "./routers/admin.router.js";
 import { pool } from "./db/db.js";
 import AdminRepository from "./repositories/admin.repository.js";
+import multer from "multer";
+import { getPath } from "./helpers/filesHelpers.js";
+
+export const uploadImage = multer({dest: getPath("../view/static/bookImages")});
 
 const expressApp: Express = express();
 

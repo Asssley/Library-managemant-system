@@ -21,20 +21,27 @@ export const validateSearchParams = function (req: Request): SeacrhParamsDTO {
       queryObj.sortBy === "desc")
       && { sortDirection: queryObj.sortBy }),
   }
-  
+
   return searchParams
 }
 
 export const validateNewBook = function (req: Request): NewBookDTO | null {
+
   const book = req.body;
 
-  if (typeof book.title === "string" && 
-      typeof book.author === "string" &&
-      typeof book.year === "number" &&
-      typeof book.description === "string" &&
-      typeof book.pagesCount === "number" &&
-      (typeof book.imagePath === "string" || book.year === null) &&
-      (typeof book.rating === "number" || book.year === null)) {
+  if (req.file?.path) {
+    book.imagePath = req.file.path;
+  } else {
+    book.imagePath = null;
+  }
+
+  if (typeof book.title === "string" &&
+    typeof book.author === "string" &&
+    typeof book.year === "number" &&
+    typeof book.description === "string" &&
+    typeof book.pagesCount === "number" &&
+    (typeof book.imagePath === "string" || book.year === null) &&
+    (typeof book.rating === "number" || book.year === null)) {
     return book;
   }
 

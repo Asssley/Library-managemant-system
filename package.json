@@ -16,10 +16,12 @@
     "ejs": "^4.0.1",
     "express": "^5.2.1",
     "g": "^2.0.1",
+    "multer": "^2.0.2",
     "mysql2": "^3.16.0",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "@types/express": "^5.0.6"
+    "@types/express": "^5.0.6",
+    "@types/multer": "^2.0.0"
   }
 }
