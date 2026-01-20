@@ -1,4 +1,5 @@
 import mysql, { type PoolOptions } from "mysql2/promise";
+import { getSQL } from "../helpers/filesHelpers.js";
 
 export const pool = mysql.createPool({
   host: process.env.DB_HOST,
@@ -7,3 +8,6 @@ export const pool = mysql.createPool({
   database: process.env.DB_NAME,
   connectionLimit: 10
 } as PoolOptions);
+
+pool.execute(await getSQL("./queries/createBooksTable.sql"));
+pool.execute(await getSQL("./queries/createUsersTable.sql"));

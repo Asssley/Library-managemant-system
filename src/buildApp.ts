@@ -2,7 +2,7 @@ import express, { type Express, type Request, type Response } from "express";
 import BookRepository from "./repositories/book.repository.js";
 import userRouter from "./routers/user.router.js";
 import adminRouter from "./routers/admin.router.js";
-import { pool } from "./db/scripts.js";
+import { pool } from "./db/db.js";
 import AdminRepository from "./repositories/admin.repository.js";
 
 const expressApp: Express = express();
