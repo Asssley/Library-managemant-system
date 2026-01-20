@@ -6,8 +6,8 @@ export interface Book extends RowDataPacket {
   author: string,
   year: number,
   description: string,
-  imagePath?: string,
+  imagePath: string | null,
   pagesCount: number,
-  rating?: number,
+  rating: number | null,
   clickCount: number
 }
