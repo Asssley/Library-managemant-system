@@ -12,8 +12,8 @@ export default class BookRepository implements IBookRepository {
   constructor(private readonly pool: Pool) { };
 
   async getBooks(offset: number): Promise<BookDTO[]> {
-    const sql = await getSQL("../db/queries/getAllBooks.sql");
-    const [result] = await this.pool.execute<Book[]>(sql);
+    const sql = await getSQL("../db/queries/getBooks.sql");
+    const [result] = await this.pool.execute<Book[]>(sql, [offset]);
 
     const books = result.map((book => convertBookToDTO(book)));
     return books;
@@ -78,8 +78,8 @@ export default class BookRepository implements IBookRepository {
       book.description,
       book.pagesCount,
       book.year,
-      ...(typeof book.imagePath === "string" ? [book.imagePath] : []),
-      ...(typeof book.rating === "string" ? [book.rating] : [])
+      typeof book.imagePath === "string" ? [book.imagePath] : null,
+      typeof book.rating === "string" ? [book.rating] : null
     ]);
 
     return result.insertId;

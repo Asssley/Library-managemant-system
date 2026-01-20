@@ -19,7 +19,7 @@ export const renderBookPage = async function (req: Request, res: Response) {
   }
 
   const book = await bookRepository.getBookById(bookId);
-  res.render(path.join(__dirname, "../views/book.ejs"), book);
+  res.render(path.join(__dirname, "../views/book.ejs"), book ?? undefined);
 }
 
 export const renderMainPageWithSearch = async function (req: Request, res: Response) {
