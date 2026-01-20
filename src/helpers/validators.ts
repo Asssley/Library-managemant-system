@@ -33,8 +33,8 @@ export const validateNewBook = function (req: Request): NewBookDTO | null {
       typeof book.year === "number" &&
       typeof book.description === "string" &&
       typeof book.pagesCount === "number" &&
-      (typeof book.imagePath === "string" || book.year === undefined) &&
-      (typeof book.rating === "number" || book.year === undefined)) {
+      (typeof book.imagePath === "string" || book.year === null) &&
+      (typeof book.rating === "number" || book.year === null)) {
     return book;
   }
 
