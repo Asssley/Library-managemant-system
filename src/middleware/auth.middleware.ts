@@ -1,5 +1,5 @@
 import { type Request, type Response, type NextFunction } from "express";
-import { adminRepository } from "../buildApp.js";
+import { adminRepository } from "../initParts.js";
 
 const authMiddleware = async function (req: Request, res: Response, next: NextFunction) {
   next();

@@ -1,7 +1,7 @@
 import { Router, type Request, type  Response } from "express";
 import { renderMainAdminPage, renderMainPageWithSearch, renderAddPage, addBook, removeBook } from "../controllers/api/v1/admin.controller.js";
 import authMiddleware from "../middleware/auth.middleware.js";
-import { uploadImage } from "../buildApp.js";
+import { uploadImage } from "../initParts.js";
 
 const router = Router();
 

@@ -1,6 +1,6 @@
 import { type Request, type Response } from "express";
 import path from "path";
-import { bookRepository } from "../../../buildApp.js";
+import { bookRepository } from "../../../initParts.js";
 import { validateSearchParams, validateNewBook } from "../../../helpers/validators.js";
 
 export const renderMainAdminPage = async function (req: Request, res: Response) {
@@ -8,7 +8,7 @@ export const renderMainAdminPage = async function (req: Request, res: Response) 
   offset = isNaN(offset) ? 0 : offset;
 
   const books = await bookRepository.getBooks(offset)
-  res.render(path.join(__dirname, "../views/admin-main.ejs"), books);
+  res.render(path.join(__dirname, "../../views/pages/admin-main.ejs"), books);
 }
 
 export const renderMainPageWithSearch = async function (req: Request, res: Response) {
@@ -18,11 +18,11 @@ export const renderMainPageWithSearch = async function (req: Request, res: Respo
   const searchParams = validateSearchParams(req);
 
   const books = await bookRepository.searchBooks(offset, searchParams)
-  res.render(path.join(__dirname, "../views/admin-main.ejs"), books);
+  res.render(path.join(__dirname, "../../views/pages/admin-main.ejs"), books);
 }
 
 export const renderAddPage = async function (req: Request, res: Response) {
-  res.render(path.join(__dirname, "../views/add-page.ejs"));
+  res.render(path.join(__dirname, "../../views/pages/add-page.ejs"));
 }
 
 export const addBook = async function (req: Request, res: Response) {
