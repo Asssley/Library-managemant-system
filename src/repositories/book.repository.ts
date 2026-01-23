@@ -12,15 +12,18 @@ export default class BookRepository implements IBookRepository {
   constructor(private readonly pool: Pool) { };
 
   async getBooks(offset: number): Promise<BookDTO[]> {
-    const sql = await getSQL("../db/queries/getBooks.sql");
-    const [result] = await this.pool.execute<Book[]>(sql, [offset]);
+    const sql = await getSQL("getBooks.sql");
+
+    const query = sql.replace('?', offset.toString());
+
+    const [result] = await this.pool.execute<Book[]>(query, [offset]);
 
     const books = result.map((book => convertBookToDTO(book)));
     return books;
   }
 
   async getBookById(id: number): Promise<BookDTO | null> {
-    const sql = await getSQL("../db/queries/getBookById.sql");
+    const sql = await getSQL("getBookById.sql");
     const [result] = await this.pool.execute<Book[]>(sql, [id]);
 
     if (result.length !== 0) {
@@ -32,7 +35,7 @@ export default class BookRepository implements IBookRepository {
   }
 
   async searchBooks(offset: number, searchParams?: SeacrhParamsDTO): Promise<BookDTO[]> {
-    let sql = await getSQL("../db/queries/searchBooks.sql");
+    let sql = await getSQL("searchBooks.sql");
     const conditions = [];
     const params = [];
 
@@ -71,7 +74,7 @@ export default class BookRepository implements IBookRepository {
   }
 
   async addBook(book: NewBookDTO): Promise<number> {
-    const sql = await getSQL("../db/queries/addBook.sql");
+    const sql = await getSQL("addBook.sql");
     const [result] = await this.pool.execute<ResultSetHeader>(sql, [
       book.title,
       book.author,
@@ -86,14 +89,14 @@ export default class BookRepository implements IBookRepository {
   }
 
   async removeBook(id: number): Promise<boolean> {
-    const sql = await getSQL("../db/queries/removeBook.sql");
+    const sql = await getSQL("removeBook.sql");
     const [result] = await this.pool.execute<ResultSetHeader>(sql, [id]);
 
     return result.affectedRows !== 0;
   }
 
   async increaseTapsCount(id: number): Promise<boolean> {
-    const sql = await getSQL("../db/queries/increaseTaps.sql");
+    const sql = await getSQL("increaseTaps.sql");
     const [result] = await this.pool.execute<ResultSetHeader>(sql, [id]);
 
     return result.affectedRows !== 0;
