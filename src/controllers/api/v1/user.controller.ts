@@ -8,18 +8,18 @@ export const renderMainPage = async function (req: Request, res: Response) {
   offset = isNaN(offset) ? 0 : offset;
 
   const books = await bookRepository.getBooks(offset)
-  res.render(path.join(__dirname, "../../views/pages/main.ejs"), books);
+  res.render(path.join(__dirname, "../views/pages/main.ejs"), books);
 }
 
 export const renderBookPage = async function (req: Request, res: Response) {
   const bookId = Number(req.params.id);
 
   if (isNaN(bookId)) {
-    res.render(path.join(__dirname, "../../views/pages/404.ejs"));
+    res.render(path.join(__dirname, "../views/pages/404.ejs"));
   }
 
   const book = await bookRepository.getBookById(bookId);
-  res.render(path.join(__dirname, "../../views/pages/book.ejs"), book ?? undefined);
+  res.render(path.join(__dirname, "../views/pages/book.ejs"), book ?? undefined);
 }
 
 export const renderMainPageWithSearch = async function (req: Request, res: Response) {
@@ -29,7 +29,7 @@ export const renderMainPageWithSearch = async function (req: Request, res: Respo
   const searchParams = validateSearchParams(req);
 
   const books = await bookRepository.searchBooks(offset, searchParams)
-  res.render(path.join(__dirname, "../../views/pages/smain.ejs"), books);
+  res.render(path.join(__dirname, "../views/pages/smain.ejs"), books);
 }
 
 export const increaseTapsCount = async function (req: Request, res: Response) {

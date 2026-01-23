@@ -1,10 +1,18 @@
-import {readFile} from "fs/promises"
+import { readFile } from "fs/promises"
 import path from "path";
 
-export const getPath = function (pathToFile: string): string {
-  return path.join(__dirname, "../views/admin-main.ejs");
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export const getPath = function (pathToFile: string | string[]): string {
+  if (Array.isArray(pathToFile)) {
+    return path.join(__dirname, "../", ...pathToFile);
+  }
+  return path.join(__dirname, "../", pathToFile);
 }
 
 export const getSQL = async function (path: string): Promise<string> {
-  return await readFile(getPath(path), "utf8");
+  return await readFile(getPath(["../sql", path]), "utf8");
 }

@@ -9,5 +9,5 @@ export const pool = mysql.createPool({
   connectionLimit: 10
 } as PoolOptions);
 
-pool.execute(await getSQL("./queries/createBooksTable.sql"));
-pool.execute(await getSQL("./queries/createUsersTable.sql"));
+pool.execute(await getSQL("createBooksTable.sql"));
+pool.execute(await getSQL("createUsersTable.sql"));
