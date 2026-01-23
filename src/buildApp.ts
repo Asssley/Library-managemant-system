@@ -7,11 +7,11 @@ const expressApp: Express = express();
 
 expressApp.set("view engine", "ejs");
 
-expressApp.use(express.json);
+expressApp.use(express.json());
 
 expressApp.use(userRouter);
 
-expressApp.use("/admin", adminRouter)
+expressApp.use("/admin", adminRouter);
 
 expressApp.use((req: Request, res: Response) => {
   res.sendStatus(404);
