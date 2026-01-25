@@ -2,7 +2,6 @@ import { type Request, type Response, type NextFunction } from "express";
 import { adminRepository } from "../initParts.js";
 
 const authMiddleware = async function (req: Request, res: Response, next: NextFunction) {
-  next();
   let authHeader = req.headers.authorization?.split(" ")[1];
 
   if (authHeader) {
@@ -15,14 +14,14 @@ const authMiddleware = async function (req: Request, res: Response, next: NextFu
       && password 
       && await adminRepository.checkUser(login, password)
     ) {
-      next();
+      return next();
     }
   }
 
   res
     .status(401)
-    .setHeader("www-Autenticate", 'Basic realm="API"')
-    .json({ error: "Unautorized " });
+    .set("WWW-Authenticate", 'Basic realm="API"')
+    .json({ error: "Unauthorized" });
 };
 
 export default authMiddleware;
