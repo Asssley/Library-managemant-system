@@ -16,18 +16,18 @@ export default class BookRepository implements IBookRepository {
 
     const query = sql.replace('?', offset.toString());
 
-    const [result] = await this.pool.execute<Book[]>(query, [offset]);
+    const [rows] = await this.pool.execute<Book[]>(query, [offset]);
 
-    const books = result.map((book => convertBookToDTO(book)));
+    const books = rows.map((book => convertBookToDTO(book)));
     return books;
   }
 
   async getBookById(id: number): Promise<BookDTO | null> {
     const sql = await getSQL("getBookById.sql");
-    const [result] = await this.pool.execute<Book[]>(sql, [id]);
+    const [rows] = await this.pool.execute<Book[]>(sql, [id]);
 
-    if (result.length !== 0) {
-      const book = convertBookToDTO(result[0] as Book);
+    if (rows.length !== 0) {
+      const book = convertBookToDTO(rows[0] as Book);
       return book;
     }
 
@@ -67,9 +67,9 @@ export default class BookRepository implements IBookRepository {
     sql += ` LIMIT 20 OFFSET ?`;
     params.push(offset);
 
-    const [result] = await this.pool.execute<Book[]>(sql, params);
+    const [rows] = await this.pool.execute<Book[]>(sql, params);
 
-    const books = result.map((book => convertBookToDTO(book)));
+    const books = rows.map((book => convertBookToDTO(book)));
     return books;
   }
 

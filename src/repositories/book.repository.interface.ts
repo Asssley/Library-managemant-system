@@ -23,20 +23,20 @@ export default interface IBookRepository {
   searchBooks(offset: number, searchParams?: SeacrhParamsDTO): Promise<BookDTO[]>;
   
   /**
-   * 
+   * Add new book
    * @param book Book that need to be added
    */
   addBook(book: NewBookDTO): Promise<number>;
 
   /**
-   * 
+   * Remove book 
    * @param id Book's id that need to be removed
    */
   removeBook(id: number): Promise<boolean>;
 
   /**
-   * 
-   * @param id Book's id that need to be removed
+   * Inrease count of taps of specific book
+   * @param id Book's id that taps couny need to be increased
    */
   increaseTapsCount(id: number): Promise<boolean>;
 }

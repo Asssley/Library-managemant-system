@@ -1,20 +1,20 @@
 import { Router } from "express";
-import { renderMainAdminPage, renderMainPageWithSearch, renderAddPage, addBook, removeBook } from "../controllers/api/v1/admin.controller.js";
 import authMiddleware from "../middleware/auth.middleware.js";
 import { uploadImage } from "../initParts.js";
+import { 
+  renderMainAdminPage, 
+  renderMainPageWithSearch, 
+  renderAddPage, 
+  addBook, 
+  removeBook 
+} from "../controllers/api/admin.controller.js";
 
-const router = Router();
+export const adminRouter = Router();
 
-router.use(authMiddleware)
+adminRouter.use(authMiddleware)
 
-router.get("/", renderMainAdminPage);
-
-router.get("/add", renderAddPage);
-
-router.get("/search", renderMainPageWithSearch);
-
-router.post("/api/add", uploadImage.single("image"), addBook);
-
-router.post("/api/remove", removeBook);
-
-export default router;
+adminRouter.get("/", renderMainAdminPage);
+adminRouter.get("/add", renderAddPage);
+adminRouter.get("/search", renderMainPageWithSearch);
+adminRouter.post("/api/add", uploadImage.single("image"), addBook);
+adminRouter.post("/api/remove", removeBook);

@@ -1,7 +1,7 @@
 import { type Request, type Response } from "express";
-import { bookRepository } from "../../../initParts.js";
-import { validateSearchParams, validateNewBook } from "../../../helpers/validators.js";
-import { getPath } from "../../../helpers/filesHelpers.js";
+import { bookRepository } from "../../initParts.js";
+import { validateSearchParams, validateNewBook } from "../../helpers/validators.js";
+import { getPath } from "../../helpers/filesHelpers.js";
 
 export const renderMainAdminPage = async function (req: Request, res: Response) {
   let offset = Number(req.query.offset);
