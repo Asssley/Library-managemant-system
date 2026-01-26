@@ -8,18 +8,18 @@ export const renderMainPage = async function (req: Request, res: Response) {
   offset = isNaN(offset) ? 0 : offset;
 
   const books = await bookRepository.getBooks(offset)
-  res.render(getPath("../view/pages/main.ejs"), books);
+  return res.render(getPath("../view/pages/main.ejs"), books);
 }
 
 export const renderBookPage = async function (req: Request, res: Response) {
   const bookId = Number(req.params.id);
 
   if (isNaN(bookId)) {
-    res.render(getPath("../view/pages/404.ejs"));
+    return res.render(getPath("../view/pages/404.ejs"));
   }
 
   const book = await bookRepository.getBookById(bookId);
-  res.render(getPath("../view/pages/book.ejs"), book ?? undefined);
+  return res.render(getPath("../view/pages/book.ejs"), book ?? undefined);
 }
 
 export const renderMainPageWithSearch = async function (req: Request, res: Response) {
@@ -29,19 +29,19 @@ export const renderMainPageWithSearch = async function (req: Request, res: Respo
   const searchParams = validateSearchParams(req);
 
   const books = await bookRepository.searchBooks(offset, searchParams)
-  res.render(getPath("../view/pages/smain.ejs"), books);
+  return res.render(getPath("../view/pages/smain.ejs"), books);
 }
 
 export const increaseTapsCount = async function (req: Request, res: Response) {
   const bookId = Number(req.params.id);
 
   if (isNaN(bookId)) {
-    res.status(404).json({ error: "Not found" });
+    return res.status(404).json({ error: "Not found" });
   }
 
   const result = await bookRepository.increaseTapsCount(bookId);
   if (result) {
-    res.status(200).json({ ok: true });
+    return res.status(200).json({ ok: true });
   }
-  res.status(404).json({ error: "Not found" });
+  return res.status(404).json({ error: "Not found" });
 }
