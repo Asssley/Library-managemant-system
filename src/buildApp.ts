@@ -8,7 +8,7 @@ export const expressApp: Express = express();
 
 expressApp.set("view engine", "ejs");
 expressApp.use(express.static(getPath("../view/static")));
-expressApp.use(express.json());
+expressApp.use(express.urlencoded({ extended: true }));
 
 expressApp.use(userRouter);
 expressApp.use("/admin", adminRouter);
