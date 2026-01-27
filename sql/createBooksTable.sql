@@ -7,5 +7,5 @@ CREATE TABLE IF NOT EXISTS books (
   imagePath VARCHAR(255),
   pagesCount INT NOT NULL CHECK(pagesCount > 0),
   rating INT NOT NULL CHECK(rating >= 0 AND rating <= 5),
-  clickCount INT NOT NULL DEFAULT 0 CHECK(clickCount > 0)
+  clickCount INT NOT NULL DEFAULT 0 CHECK(clickCount >= 0)
 );
