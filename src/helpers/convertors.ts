@@ -1,5 +1,5 @@
-import type { Book } from "../db/models/Book.js"
-import type BookDTO from "../dto/BookDTO.js";
+import { type Book } from "../db/models/Book.js"
+import { type BookDTO } from "../dto/bookDTO.js";
 
 export const convertBookToDTO = function (book: Book): BookDTO {
   return {

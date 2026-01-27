@@ -1,6 +1,6 @@
 import { type Pool, type ResultSetHeader } from "mysql2/promise";
-import type BookDTO from "../dto/BookDTO.js";
-import type NewBookDTO from "../dto/NewBookDTO.js";
+import { type BookDTO } from "../dto/bookDTO.js";
+import { type NewBookDTO } from "../dto/bookDTO.js";
 import type SeacrhParamsDTO from "../dto/SearchParamsDTO.js";
 import type IBookRepository from "./book.repository.interface.js";
 import type { Book } from "../db/models/Book.js";
@@ -82,7 +82,7 @@ export default class BookRepository implements IBookRepository {
       book.pagesCount,
       book.year,
       typeof book.imagePath === "string" ? [book.imagePath] : null,
-      typeof book.rating === "string" ? [book.rating] : null
+      typeof book.rating === "string" ? [book.rating] : 0
     ]);
 
     return result.insertId;

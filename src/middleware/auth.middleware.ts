@@ -10,9 +10,9 @@ const authMiddleware = async function (req: Request, res: Response, next: NextFu
       .toString()
       .split(":");
       
-    if (login 
-      && password 
-      && await adminRepository.checkUser(login, password)
+    if (login && 
+      password &&
+      await adminRepository.checkUser(login, password)
     ) {
       return next();
     }

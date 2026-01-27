@@ -1,4 +1,4 @@
-import type NewBookDTO from "../dto/NewBookDTO.js";
+import { type NewBookDTO } from "../dto/bookDTO.js";
 import type SeacrhParamsDTO from "../dto/SearchParamsDTO.js";
 import { type Request } from "express";
 
@@ -26,23 +26,38 @@ export const validateSearchParams = function (req: Request): SeacrhParamsDTO {
 }
 
 export const validateNewBook = function (req: Request): NewBookDTO | null {
+  const book: any = { ...req.body };
 
-  const book = req.body;
+  const year = +book.year;
+  const pagesCount = +book.pagesCount;
+  const rating = book.rating ? +book.rating : undefined;
+
+  book.year = year;
+  book.pagesCount = pagesCount;
+  book.rating = rating;
 
   if (req.file?.path) {
     book.imagePath = req.file.path;
-  } else {
-    book.imagePath = null;
   }
 
-  if (typeof book.title === "string" &&
+  if (
+    typeof book.title === "string" &&
     typeof book.author === "string" &&
-    typeof book.year === "number" &&
+    Number.isFinite(book.year) &&
     typeof book.description === "string" &&
-    typeof book.pagesCount === "number" &&
-    (typeof book.imagePath === "string" || book.year === null) &&
-    (typeof book.rating === "number" || book.year === null)) {
-    return book;
+    Number.isFinite(book.pagesCount) &&
+    (book.imagePath === undefined || typeof book.imagePath === "string") &&
+    (book.rating === undefined || Number.isFinite(book.rating))
+  ) {
+    return {
+      title: book.title,
+      author: book.author,
+      year: book.year,
+      description: book.description,
+      pagesCount: book.pagesCount,
+      imagePath: book.imagePath,
+      rating: book.rating
+    };
   }
 
   return null;
