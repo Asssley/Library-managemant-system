@@ -2,13 +2,16 @@ import { type Request, type Response } from "express";
 import { bookRepository } from "../../initParts.js";
 import { validateSearchParams, validateNewBook } from "../../helpers/validators.js";
 import { getPath } from "../../helpers/filesHelpers.js";
+import { convertBookToAdminDTO, convertBookToShortDTO } from "../../helpers/convertors.js";
 
 export const renderMainAdminPage = async function (req: Request, res: Response) {
   let offset = Number(req.query.offset);
   offset = isNaN(offset) ? 0 : offset;
 
-  const books = await bookRepository.getBooks(offset)
-  return res.render(getPath("../view/pages/admin-main.ejs"), books);
+  const books = await bookRepository.getBooks(offset);
+  const booksDTO = books.map(book => convertBookToAdminDTO(book));
+
+  return res.render(getPath("../view/pages/admin-main.ejs"), booksDTO);
 }
 
 export const renderMainPageWithSearch = async function (req: Request, res: Response) {
@@ -17,8 +20,10 @@ export const renderMainPageWithSearch = async function (req: Request, res: Respo
 
   const searchParams = validateSearchParams(req);
 
-  const books = await bookRepository.searchBooks(offset, searchParams)
-  return res.render(getPath("../view/pages/admin-main.ejs"), books);
+  const books = await bookRepository.searchBooks(offset, searchParams);
+  const booksDTO = books.map(book => convertBookToAdminDTO(book));
+
+  return res.render(getPath("../view/pages/admin-main.ejs"), booksDTO);
 }
 
 export const renderAddPage = async function (req: Request, res: Response) {

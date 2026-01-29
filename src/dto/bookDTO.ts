@@ -1,7 +1,7 @@
 /**
- * DTO fror transport books in response
+ * DTO for transport books in response
  */
-export interface BookDTO {
+export interface FullBookDTO {
   id: number
   title: string,
   author: string,
@@ -23,4 +23,25 @@ export interface NewBookDTO {
   imagePath?: string,
   pagesCount: number,
   rating?: number,
+}
+
+/**
+ * DTO for transport book info partialy 
+ */
+export interface ShortBookDTO {
+  title: string,
+  author: string,
+  imagePath: string | null
+}
+
+/**
+ * DTO for transport book info to admin table 
+ */
+export interface AdminBookDTO {
+  id: number
+  title: string,
+  author: string,
+  year: number,
+  imagePath?: string,
+  clickCount: number,
 }

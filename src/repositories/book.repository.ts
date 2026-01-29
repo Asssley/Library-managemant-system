@@ -1,40 +1,36 @@
 import { type Pool, type ResultSetHeader } from "mysql2/promise";
-import { type BookDTO } from "../dto/bookDTO.js";
 import { type NewBookDTO } from "../dto/bookDTO.js";
 import type SeacrhParamsDTO from "../dto/SearchParamsDTO.js";
 import type IBookRepository from "./book.repository.interface.js";
 import type { Book } from "../db/models/Book.js";
-import { convertBookToDTO } from "../helpers/convertors.js";
 import { getSQL } from "../helpers/filesHelpers.js";
 
 export default class BookRepository implements IBookRepository {
 
   constructor(private readonly pool: Pool) { };
 
-  async getBooks(offset: number): Promise<BookDTO[]> {
+  async getBooks(offset: number): Promise<Book[]> {
     const sql = await getSQL("getBooks.sql");
 
     const query = sql.replace('?', offset.toString());
 
     const [rows] = await this.pool.execute<Book[]>(query, [offset]);
 
-    const books = rows.map((book => convertBookToDTO(book)));
-    return books;
+    return rows;
   }
 
-  async getBookById(id: number): Promise<BookDTO | null> {
+  async getBookById(id: number): Promise<Book | null> {
     const sql = await getSQL("getBookById.sql");
     const [rows] = await this.pool.execute<Book[]>(sql, [id]);
 
-    if (rows.length !== 0) {
-      const book = convertBookToDTO(rows[0] as Book);
-      return book;
+    if (rows[0]) {
+      return rows[0];
     }
 
     return null;
   }
 
-  async searchBooks(offset: number, searchParams?: SeacrhParamsDTO): Promise<BookDTO[]> {
+  async searchBooks(offset: number, searchParams?: SeacrhParamsDTO): Promise<Book[]> {
     let sql = await getSQL("searchBooks.sql");
     const conditions = [];
     const params = [];
@@ -69,8 +65,7 @@ export default class BookRepository implements IBookRepository {
 
     const [rows] = await this.pool.execute<Book[]>(sql, params);
 
-    const books = rows.map((book => convertBookToDTO(book)));
-    return books;
+    return rows;
   }
 
   async addBook(book: NewBookDTO): Promise<number> {

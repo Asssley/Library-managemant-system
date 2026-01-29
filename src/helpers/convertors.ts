@@ -1,7 +1,7 @@
 import { type Book } from "../db/models/Book.js"
-import { type BookDTO } from "../dto/bookDTO.js";
+import { type  FullBookDTO, type ShortBookDTO } from "../dto/bookDTO.js";
 
-export const convertBookToDTO = function (book: Book): BookDTO {
+export const convertBookToFullDTO = function (book: Book):  FullBookDTO {
   return {
     id: book.id,
     title: book.title,
@@ -11,5 +11,25 @@ export const convertBookToDTO = function (book: Book): BookDTO {
     imagePath: book.imagePath,
     pagesCount: book.pagesCount,
     rating: book.rating
-  } as BookDTO;
+  } as  FullBookDTO;
+}
+
+export const convertBookToShortDTO = function (book: Book): ShortBookDTO {
+  return {
+    id: book.id,
+    title: book.title,
+    author: book.author,
+    imagePath: book.imagePath,
+    rating: book.rating
+  } as ShortBookDTO;
+}
+
+export const convertBookToAdminDTO = function (book: Book): ShortBookDTO {
+  return {
+    id: book.id,
+    title: book.title,
+    author: book.author,
+    imagePath: book.imagePath,
+    clickCount: book.clickCount
+  } as ShortBookDTO;
 }

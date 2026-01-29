@@ -1,5 +1,5 @@
-import { type NewBookDTO } from "../dto/bookDTO.js";
-import { type BookDTO } from "../dto/bookDTO.js";
+import type { Book } from "../db/models/Book.js";
+import type { NewBookDTO } from "../dto/bookDTO.js";
 import type SeacrhParamsDTO from "../dto/SearchParamsDTO.js";
 
 export default interface IBookRepository {
@@ -7,20 +7,20 @@ export default interface IBookRepository {
    * Get up to 20 first books wich stay next to skipped ones 
    * @param offset Offset from start of book colection that will be skipped
    */
-  getBooks(offset: number, searchParams: SeacrhParamsDTO): Promise<BookDTO[]>;
+  getBooks(offset: number, searchParams: SeacrhParamsDTO): Promise<Book[]>;
 
   /**
    * Get book by it's id
    * @param id Id book that needed to be found
    */
-  getBookById(id: number): Promise<BookDTO | null>;
+  getBookById(id: number): Promise< Book | null>;
 
   /**
    * Get up to 20 first books wich stay next to skipped ones 
    * @param offset Offset from start of book colection that will be skipped
    * @param searchParams Object with params which are needed to use in search
    */
-  searchBooks(offset: number, searchParams?: SeacrhParamsDTO): Promise<BookDTO[]>;
+  searchBooks(offset: number, searchParams?: SeacrhParamsDTO): Promise<Book[]>;
 
   /**
    * Add new book
