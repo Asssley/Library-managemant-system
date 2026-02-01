@@ -1,0 +1,38 @@
+<%
+  const limit = 20;
+  const pagesCount = Math.ceil(allBooksCount / limit);
+  const currentPage = Math.floor(offset / limit) + 1;
+
+  const start = Math.max(2, currentPage - 1);
+  const end = Math.min(pagesCount - 1, currentPage + 1);
+%>
+
+<div class="d-flex justify-content-center">
+  <div class="btn-group my-3">
+  
+    <a href="/search?<%= queryString %>&offset=<%= 0 %>" class="pagination-btn btn btn-secondary">
+      <%= 1 %>
+    </a>
+  
+    <% if (currentPage > 3) { %>
+      <a class="pagination-btn btn btn-secondary">...</a>
+    <% } %>
+  
+    <% for (let i = start; i <= end; i++) { %>
+      <a href="/search?<%= queryString %>&offset=<%= (i - 1) * 20 %>" class="pagination-btn btn btn-secondary">
+        <%= i %>
+      </a>
+    <% } %>
+  
+    <% if (currentPage < pagesCount - 2) { %>
+      <a class="pagination-btn btn btn-secondary">...</a>
+    <% } %>
+  
+    <% if (pagesCount > 1) { %>
+      <a href="/search?<%= queryString %>&offset=<%= (pagesCount - 1) * 20 %>" class="pagination-btn btn btn-secondary">
+        <%= pagesCount %>
+      </a>
+    <% } %>
+  
+  </div>
+</div>

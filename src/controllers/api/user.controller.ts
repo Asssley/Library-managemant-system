@@ -2,7 +2,7 @@ import { type Request, type Response } from "express";
 import { bookRepository } from "../../initParts.js";
 import { validateSearchParams } from "../../helpers/validators.js";
 import { getPath } from "../../helpers/filesHelpers.js";
-import { convertBookToShortDTO } from "../../helpers/convertors.js";
+import { convertBookToShortDTO, toSearchParams } from "../../helpers/convertors.js";
 
 export const renderMainPage = async function (req: Request, res: Response) {
   let offset = Number(req.query.offset);
@@ -11,7 +11,9 @@ export const renderMainPage = async function (req: Request, res: Response) {
   const books = await bookRepository.getBooks(offset);
   const booksDTO = books.map(book => convertBookToShortDTO(book));
 
-  return res.render(getPath("../view/pages/main.ejs"), booksDTO);
+  const allBooksCount = await bookRepository.getBooksCount();
+
+  return res.render(getPath("../view/pages/main.ejs"), { booksDTO, queryString: "", allBooksCount, offset });
 }
 
 export const renderBookPage = async function (req: Request, res: Response) {
@@ -36,7 +38,10 @@ export const renderMainPageWithSearch = async function (req: Request, res: Respo
   const books = await bookRepository.searchBooks(offset, searchParams);
   const booksDTO = books.map(book => convertBookToShortDTO(book));
 
-  return res.render(getPath("../view/pages/smain.ejs"), booksDTO);
+  const allBooksCount = await bookRepository.getBooksCount(searchParams);
+
+  const queryString = new URLSearchParams(toSearchParams(searchParams)).toString();
+  return res.render(getPath("../view/pages/main.ejs"), { booksDTO, allBooksCount, queryString, offset });
 }
 
 export const increaseTapsCount = async function (req: Request, res: Response) {
