@@ -16,3 +16,9 @@ expressApp.use("/admin", adminRouter);
 expressApp.use((req: Request, res: Response) => {
   res.sendStatus(404);
 });
+
+expressApp.use((err: Error, req: Request, res: Response) => {
+  console.error(err);
+  console.error(err.cause);
+  res.status(500).json({ error: 'Server error' });
+});

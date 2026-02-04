@@ -45,15 +45,19 @@ export const renderMainPageWithSearch = async function (req: Request, res: Respo
 }
 
 export const increaseTapsCount = async function (req: Request, res: Response) {
-  const bookId = Number(req.params.id);
+  try {
+    const bookId = Number(req.params.id);
 
-  if (isNaN(bookId)) {
+    if (isNaN(bookId)) {
+      return res.status(404).json({ error: "Not found" });
+    }
+
+    const result = await bookRepository.increaseTapsCount(bookId);
+    if (result) {
+      return res.status(200).json({ ok: true });
+    }
     return res.status(404).json({ error: "Not found" });
+  } catch (error) {
+    throw new Error("Increase taps error", { cause: error });
   }
-
-  const result = await bookRepository.increaseTapsCount(bookId);
-  if (result) {
-    return res.status(200).json({ ok: true });
-  }
-  return res.status(404).json({ error: "Not found" });
 }
