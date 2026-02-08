@@ -1,20 +1,20 @@
 <header>
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="javascript:void(0)">Book WB</a>
+      <a class="navbar-brand" href="/">Book WB</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="mynavbar">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)">Popular</a>
+            <a class="nav-link" href="/search?sortBy=clickCount&sortDirection=desc">Popular</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)">New</a>
+            <a class="nav-link" href="/search?sortBy=year&sortDirection=desc">New</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)">Best</a>
+            <a class="nav-link" href="/search?sortBy=rating&sortDirection=desc">Best</a>
           </li>
         </ul>
       </div>
@@ -26,37 +26,37 @@
 
         <button class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#filters">Advansed search</button>
 
-        <form class="d-flex flex-row">
-          <input class="form-control mx-3" type="text" placeholder="Search">
-          <button class="btn btn-secondary" type="button">Search</button>
+        <form action="/search" method="get" id="search" class="d-flex flex-row">
+          <input name="title" class="form-control mx-3" type="text" placeholder="Search">
+          <input class="btn btn-secondary" type="submit" value="Search">
         </form>
       </div>
     </div>
 
     <div class="d-flex justify-content-center">
       <div id="filters" class="collapse">
-        <form action="" class="d-flex flex-row form justify-content-around">
+        <form id="advanced-search" action="/search" method="get" class="d-flex flex-row form justify-content-around">
           <div class="d-flex flex-column justify-content-between me-5 mt-4">
-            <input type="text" placeholder="Title" class="form-control">
-            <input type="text" placeholder="Author" class="form-control">
-            <input type="number" placeholder="Year" class="form-control">
+            <input name="tittle" type="text" placeholder="Title" class="form-control">
+            <input name="author" type="text" placeholder="Author" class="form-control">
+            <input name="year" type="number" placeholder="Year" class="form-control">
           </div>
 
           <div class="d-flex flex-column justify-content-between">
             <div class="d-flex flex-column">
               <label for="sort-by" class="label">Sort by</label>
-              <select name="sort-by" id="#sort-by" class="form-select">
-                <option value="" class="form-control">Popularity</option>
-                <option value="" class="form-control">Rating</option>
-                <option value="" class="form-control">Title</option>
-                <option value="" class="form-control">Year</option>
-                <option value="" class="form-control">Pages count</option>
+              <select name="sortBy" id="sort-by" class="form-select">
+                <option value="clickCount" class="form-control">Popularity</option>
+                <option value="rating" class="form-control">Rating</option>
+                <option value="title" class="form-control">Title</option>
+                <option value="year" class="form-control">Year</option>
+                <option value="pagesCount" class="form-control">Pages count</option>
               </select>
             </div>
 
             <div class="d-flex flex-column mt-2 mb-4">
-              <label for="#sort-direction" class="label">Sort order</label>
-              <select name="" id="sort-direction" class="form-select">
+              <label for="sort-direction" class="label">Sort order</label>
+              <select name="sortDirection" id="sort-direction" class="form-select">
                 <option value="desc" class="form-control">From bigger to smaller</option>
                 <option value="asc" class="form-control">From smaller to bigger</option>
               </select>
