@@ -1,5 +1,5 @@
 import { type Book } from "../db/models/Book.js"
-import { type FullBookDTO, type ShortBookDTO } from "../dto/bookDTO.js";
+import { type AdminBookDTO, type FullBookDTO, type ShortBookDTO } from "../dto/bookDTO.js";
 
 export const convertBookToFullDTO = function (book: Book): FullBookDTO {
   return {
@@ -24,14 +24,15 @@ export const convertBookToShortDTO = function (book: Book): ShortBookDTO {
   } as ShortBookDTO;
 }
 
-export const convertBookToAdminDTO = function (book: Book): ShortBookDTO {
+export const convertBookToAdminDTO = function (book: Book): AdminBookDTO {
   return {
     id: book.id,
     title: book.title,
     author: book.author,
+    year: book.year,
     imagePath: book.imagePath,
     clickCount: book.clickCount
-  } as ShortBookDTO;
+  } as AdminBookDTO;
 }
 
 export const toSearchParams = function(obj: object) {
