@@ -17,4 +17,4 @@ adminRouter.get("/", renderMainAdminPage);
 adminRouter.get("/add", renderAddPage);
 adminRouter.get("/search", renderMainPageWithSearch);
 adminRouter.post("/api/add", uploadImage.single("image"), addBook);
-adminRouter.post("/api/remove", removeBook);
+adminRouter.post("/api/remove/:id", removeBook);
