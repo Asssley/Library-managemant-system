@@ -5,21 +5,21 @@ import { type Request } from "express";
 export const validateSearchParams = function (req: Request): SeacrhParamsDTO {
   const queryObj = req.query
 
-  let year: number | undefined = Number(queryObj.year);
+  const yearNum = Number(queryObj.year)
 
   const searchParams: SeacrhParamsDTO = {
-    ...(typeof queryObj.search === "string" && { searchLine: queryObj.search }),
-    ...(typeof queryObj.author === "string" && { author: queryObj.author }),
-    ...(!isNaN(year) && { year: year }),
+    ...(typeof queryObj.search === "string" && queryObj.search.trim() !== "" && { searchLine: queryObj.search }),
+    ...(typeof queryObj.author === "string" && queryObj.author.trim() !== "" && { author: queryObj.author }),
+    ...(Number.isInteger(yearNum) && yearNum > 0 && { year: yearNum }),
     ...((queryObj.sortBy === "title" ||
       queryObj.sortBy === "year" ||
       queryObj.sortBy === "pagesCount" ||
       queryObj.sortBy === "rating" ||
       queryObj.sortBy === "clickCount")
       && { sortBy: queryObj.sortBy }),
-    ...((queryObj.sortBy === "asc" ||
-      queryObj.sortBy === "desc")
-      && { sortDirection: queryObj.sortBy }),
+    ...((queryObj.sortDirection === "asc" ||
+      queryObj.sortDirection === "desc")
+      && { sortDirection: queryObj.sortDirection }),
   }
 
   return searchParams
@@ -41,10 +41,10 @@ export const validateNewBook = function (req: Request): NewBookDTO | null {
   }
 
   if (
-    typeof book.title === "string" &&
-    typeof book.author === "string" &&
+    (typeof book.title === "string" && book.title !== "") &&
+    (typeof book.author === "string" && book.author !== "") &&
     Number.isFinite(book.year) &&
-    typeof book.description === "string" &&
+    (typeof book.description === "string" && book.description !== "") &&
     Number.isFinite(book.pagesCount) &&
     (book.imagePath === undefined || typeof book.imagePath === "string") &&
     (book.rating === undefined || Number.isFinite(book.rating))
