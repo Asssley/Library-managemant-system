@@ -104,8 +104,8 @@ export default class BookRepository implements IBookRepository {
       book.description,
       book.pagesCount,
       book.year,
-      typeof book.imagePath === "string" ? [book.imagePath] : null,
-      typeof book.rating === "string" ? [book.rating] : 0
+      typeof book.imagePath === "string" ? book.imagePath : null,
+      typeof book.rating === "string" ? book.rating : 0
     ]);
 
     return result.insertId;
