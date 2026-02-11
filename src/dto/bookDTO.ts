@@ -1,47 +1,21 @@
+import type { Book } from "../db/models/Book.js"
+
 /**
  * DTO for transport books in response
  */
-export interface FullBookDTO {
-  id: number
-  title: string,
-  author: string,
-  year: number,
-  description: string,
-  imagePath?: string,
-  pagesCount: number,
-  rating?: number,
-}
+export type FullBookDTO = Omit<Book, "clickCount">;
 
 /**
  * DTO for creating new book
  */
-export interface NewBookDTO {
-  title: string,
-  author: string,
-  year: number,
-  description: string,
-  imagePath?: string,
-  pagesCount: number,
-  rating?: number,
-}
+export type NewBookDTO = Omit<Book, "id" | "clickCount">;
 
 /**
  * DTO for transport book info partialy 
  */
-export interface ShortBookDTO {
-  title: string,
-  author: string,
-  imagePath: string | null
-}
+export type ShortBookDTO = Pick<Book, "id" | "title" | "author" | "imagePath">;
 
 /**
  * DTO for transport book info to admin table 
  */
-export interface AdminBookDTO {
-  id: number
-  title: string,
-  author: string,
-  year: number,
-  imagePath?: string,
-  clickCount: number,
-}
+export type AdminBookDTO = Omit<Book, "description" | "pagesCount" | "rating">;
