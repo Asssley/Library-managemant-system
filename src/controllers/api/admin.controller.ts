@@ -44,6 +44,13 @@ export const addBook = async function (req: Request, res: Response) {
       return res.status(201).json({ id: newBookID });
     }
 
+    if (req.file?.path) {
+      fs.unlink(getPath(["..", req.file?.path]), err => {
+        if (err) {
+          console.error("Error while deletind image of invalid book");
+        }
+      });
+    }
     return res.status(400).json({ error: "Bad request" })
   } catch (error) {
 
@@ -82,7 +89,7 @@ export const removeBook = async function (req: Request, res: Response) {
     if (book?.imagePath) {
       fs.unlink(getPath(["..", book.imagePath]), err => {
         if (err) {
-          throw new Error("Remove book image error", { cause: err });
+          console.error(`Error while deletind book image ${book.imagePath}`);
         }
       });
     }
