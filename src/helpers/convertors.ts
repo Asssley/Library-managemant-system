@@ -20,7 +20,6 @@ export const convertBookToShortDTO = function (book: Book): ShortBookDTO {
     title: book.title,
     author: book.author,
     imagePath: book.imagePath,
-    rating: book.rating
   } as ShortBookDTO;
 }
 
